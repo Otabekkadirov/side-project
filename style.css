@@ -1,0 +1,11 @@
+.box-container {
+  display: flex;
+  gap: 1px;
+  flex-flow: row wrap;
+}
+.box {
+  width: 15px;
+  height: 15px;
+  border: 1px solid black;
+  border-radius: 3px;
+}
