@@ -1,11 +1,77 @@
-.box-container {
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  box-sizing: inherit;
+  font-size: 16px;
+}
+body {
+  background-color: rgb(197, 191, 191);
+}
+
+.wrapper {
+  max-width: calc(100% - 120px);
+  margin: 0 auto;
+}
+.header {
+  padding: 1em;
   display: flex;
-  gap: 1px;
-  flex-flow: row wrap;
+  flex-flow: column wrap;
+  gap: 1.5em;
+  align-items: center;
+  text-align: center;
+}
+
+.header__buttons {
+  display: flex;
+  gap: 10px;
+}
+.button {
+  background-color: transparent;
+  padding: 0.5em;
+  cursor: pointer;
+  border-radius: 6px;
+}
+.button:active {
+  scale: 0.95;
+}
+
+.form {
+  text-align: center;
+  display: none;
+}
+input {
+  background-color: transparent;
+  padding: 0.5em;
+  border-radius: 6px;
+}
+label {
+  display: block;
+  margin-bottom: 0.5em;
+}
+.box-container {
+  /* display: flex;
+  gap: 2px;
+  flex-flow: row wrap; */
+  --columns: 10;
+  --rows: 10;
+  --box-area: 50px;
+  display: grid;
+  grid-template-columns: repeat(var(--columns), var(--box-area));
+  grid-template-rows: repeat(var(--rows), var(--box-area));
+  gap: 3px;
+  justify-content: center;
 }
 .box {
-  width: 15px;
-  height: 15px;
+  /* width: 5px;
+  height: 5px; */
   border: 1px solid black;
   border-radius: 3px;
+}
+.age {
+  background-color: chartreuse;
 }

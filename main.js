@@ -1,27 +1,63 @@
-const username = document.querySelector("#username");
-const usernumber = document.querySelector("#usernumber");
-const userdate = document.querySelector("#birthdate");
+let range = 0;
+let age = 0;
+
+const USERNAME = document.querySelector("#username");
+const USERDATE = document.querySelector("#birthdate");
 
 const form = document.querySelector("#form");
 const output = document.querySelector(".output");
 const textContainer = output.querySelector(".text-container");
 const boxContainer = output.querySelector(".box-container");
 
-form.addEventListener("submit", (event) => {
-  let myDate = new Date(userdate.value);
-  console.log(myDate);
-  console.log(userdate.value);
-  event.preventDefault();
-  let user = username.value || "user";
-  let chosenNumber = parseInt(usernumber.value) || 0;
-  textContainer.textContent = `Hello, ${user}. You chose ${chosenNumber}.`;
-  boxContainer.textContent = "";
+const buttons = document.querySelectorAll(".button");
 
-  while (0 < chosenNumber) {
-    let box = document.createElement("div");
-    box.classList.add("box");
-    boxContainer.append(box);
-    chosenNumber--;
-  }
+buttons.forEach((button) => {
+  button.addEventListener("click", (event) => {
+    switch (event.target.id) {
+      case "year":
+        range = 100;
+        break;
+      case "month":
+        range = 1200;
+        break;
+      case "week":
+        range = 5200;
+        break;
+      case "day":
+        range = 36500;
+        break;
+      default:
+        return;
+    }
+    event.target.parentElement.style.display = "none";
+    form.style.display = "block";
+    console.log(boxContainer.getAttributeNames());
+    //todo
+    boxContainer.style.setProperty("--columns", "5");
+  });
+});
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  let now = new Date();
+  let userDate = new Date(USERDATE.value);
+  age = now.getFullYear() - userDate.getFullYear();
+
+  let user = USERNAME.value || "user";
+  textContainer.textContent = `Hello, ${user}. You were born in ${userDate.getFullYear()}. You are ${age} years old.`;
+  boxContainer.textContent = "";
+  createBoxes(range);
   form.reset();
 });
+
+function createBoxes(number) {
+  for (let i = 0; i < number; i++) {
+    let box = document.createElement("div");
+    box.classList.add("box");
+    if (i < age) {
+      box.classList.add("age");
+    }
+    boxContainer.append(box);
+  }
+}
