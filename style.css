@@ -11,6 +11,7 @@ html {
 }
 body {
   background-color: rgb(197, 191, 191);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .wrapper {
@@ -49,29 +50,34 @@ input {
   padding: 0.5em;
   border-radius: 6px;
 }
+input[type="submit"],
+input[type="reset"] {
+  cursor: pointer;
+}
 label {
   display: block;
   margin-bottom: 0.5em;
+  font-size: 1.5em;
+}
+.output {
+  text-align: center;
+  font-size: 2em;
 }
 .box-container {
-  /* display: flex;
-  gap: 2px;
-  flex-flow: row wrap; */
   --columns: 10;
   --rows: 10;
   --box-area: 50px;
+  --gap: 3px;
   display: grid;
-  grid-template-columns: repeat(var(--columns), var(--box-area));
+  grid-template-columns: repeat(var(--columns), minmax(auto, var(--box-area)));
   grid-template-rows: repeat(var(--rows), var(--box-area));
-  gap: 3px;
+  gap: var(--gap);
   justify-content: center;
 }
 .box {
-  /* width: 5px;
-  height: 5px; */
   border: 1px solid black;
   border-radius: 3px;
 }
-.age {
-  background-color: chartreuse;
+.colored-box {
+  background-color: rgb(216, 144, 130);
 }
