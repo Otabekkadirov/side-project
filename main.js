@@ -1,5 +1,5 @@
-let range = 0;
-let age = 0;
+let RANGE = 0;
+let AGE = 0;
 
 const USERNAME = document.querySelector("#username");
 const USERDATE = document.querySelector("#birthDate");
@@ -18,39 +18,14 @@ const buttons = document.querySelectorAll(".button");
 
 buttons.forEach((button) => {
   button.addEventListener("click", (event) => {
-    range = setRange(event.target.id);
+    let userClickedButton = event.target.id;
+    RANGE = setRange(userClickedButton);
 
     event.target.parentElement.style.display = "none";
     form.style.display = "block";
-    //todo
-    switch (event.target.id) {
-      case "year":
-        boxContainer.style.setProperty("--columns", "10");
-        boxContainer.style.setProperty("--rows", "10");
-        boxContainer.style.setProperty("--box-area", "50px");
-        boxContainer.style.setProperty("--gap", "3px");
-        break;
-      case "month":
-        boxContainer.style.setProperty("--columns", "36");
-        boxContainer.style.setProperty("--rows", "35");
-        boxContainer.style.setProperty("--box-area", "30px");
-        boxContainer.style.setProperty("--gap", "3px");
-        break;
-      case "week":
-        boxContainer.style.setProperty("--columns", "52");
-        boxContainer.style.setProperty("--rows", "100");
-        boxContainer.style.setProperty("--box-area", "15px");
-        boxContainer.style.setProperty("--gap", "2px");
-        break;
-      case "day":
-        boxContainer.style.setProperty("--columns", "182");
-        boxContainer.style.setProperty("--rows", "202");
-        boxContainer.style.setProperty("--box-area", "6px");
-        boxContainer.style.setProperty("--gap", "1px");
-        break;
-      default:
-        return;
-    }
+
+    chooseBoxLayout(userClickedButton);
+    // calculateAge(userClickedButton)
   });
 });
 
@@ -59,12 +34,12 @@ form.addEventListener("submit", (event) => {
 
   let now = new Date();
   let userDate = new Date(USERDATE.value);
-  age = now.getFullYear() - userDate.getFullYear();
+  AGE = now.getFullYear() - userDate.getFullYear();
 
   let user = USERNAME.value || "user";
-  textContainer.textContent = `Hello, ${user}. You were born in ${userDate.getFullYear()}. You are ${age} years old.`;
+  textContainer.textContent = `Hello, ${user}. You were born in ${userDate.getFullYear()}. You are ${AGE} years old.`;
   boxContainer.textContent = "";
-  createBoxes(range);
+  createBoxes(RANGE);
   form.reset();
 });
 
@@ -82,9 +57,23 @@ function createBoxes(number) {
   for (let i = 0; i < number; i++) {
     let box = document.createElement("div");
     box.classList.add("box");
-    if (i < age) {
+    if (i < AGE) {
       box.classList.add("colored-box");
     }
     boxContainer.append(box);
   }
 }
+function chooseBoxLayout(userChoice) {
+  const layout = {
+    // columns, rows, area, gap
+    year: ["10", "10", "50px", "3px"],
+    month: ["36", "35", "30px", "3px"],
+    week: ["52", "100", "15px", "2px"],
+    day: ["182", "202", "6px", "1px"],
+  };
+  boxContainer.style.setProperty("--columns", `${layout[userChoice][0]}`);
+  boxContainer.style.setProperty("--rows", `${layout[userChoice][1]}`);
+  boxContainer.style.setProperty("--box-area", `${layout[userChoice][2]}`);
+  boxContainer.style.setProperty("--gap", `${layout[userChoice][3]}`);
+}
+

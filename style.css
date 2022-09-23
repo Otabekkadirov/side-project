@@ -50,6 +50,7 @@ input {
   padding: 0.5em;
   border-radius: 6px;
 }
+
 input[type="submit"],
 input[type="reset"] {
   cursor: pointer;
@@ -79,5 +80,5 @@ label {
   border-radius: 3px;
 }
 .colored-box {
-  background-color: rgb(216, 144, 130);
+  background-color: rgb(153, 148, 147);
 }
