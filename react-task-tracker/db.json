@@ -1,0 +1,22 @@
+{
+  "tasks": [
+    {
+      "text": "Take test",
+      "day": "Friday",
+      "reminder": true,
+      "id": 2
+    },
+    {
+      "text": "go camping",
+      "day": "Sunday",
+      "reminder": true,
+      "id": 3
+    },
+    {
+      "text": "Change location",
+      "day": "Today",
+      "reminder": false,
+      "id": 4
+    }
+  ]
+}
